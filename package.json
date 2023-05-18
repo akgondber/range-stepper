@@ -1,0 +1,38 @@
+{
+  "name": "range-stepper",
+  "version": "1.0.0",
+  "description": "Build a range with current value and a step and use methods to get previous or next value",
+  "license": "MIT",
+  "author": "Rushan Alyautdinov <akgondber@gmail.com>",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "vitest",
+    "format": "prettier --write .",
+    "format:ch": "prettier --check .",
+    "format:pr": "prettier .",
+    "build": "tsup src/index.ts --dts --format esm"
+  },
+  "keywords": [
+    "current",
+    "index",
+    "max",
+    "min",
+    "pointer",
+    "range",
+    "range-stepper",
+    "rangestepper",
+    "step",
+    "stepper",
+    "value"
+  ],
+  "devDependencies": {
+    "prettier": "2.8.8",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.1"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ]
+}
