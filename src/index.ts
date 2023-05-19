@@ -87,6 +87,47 @@ class RangeStepper {
   hasPrevious() {
     return this.#value - this.#step >= this.#min;
   }
+
+  /**
+   * Build a clone based on current instance
+   *
+   * @returns A clone for the current instance
+   */
+  clone() {
+    return new RangeStepper({
+      min: this.#min,
+      max: this.#max,
+      step: this.#step,
+      current: this.#value,
+    });
+  }
+  /**
+   * Get min value
+   *
+   * @returns min value
+   */
+  get min() {
+    return this.#min;
+  }
+
+  /**
+   * Get max value
+   *
+   * @returns max value
+   */
+  get max() {
+    return this.#max;
+  }
+
+  /**
+   * Get step value
+   *
+   * @returns step value
+   */
+  get step() {
+    return this.#step;
+  }
+
   /**
    * Get current value
    *
@@ -94,6 +135,24 @@ class RangeStepper {
    */
   get value() {
     return this.#value;
+  }
+
+  /**
+   * Get current value
+   *
+   * @returns current value
+   */
+  get current() {
+    return this.value;
+  }
+
+  asObject(): StepperConfig {
+    return {
+      min: this.#min,
+      max: this.#max,
+      step: this.#step,
+      current: this.#value,
+    };
   }
 
   private ensureInRange(value: number) {

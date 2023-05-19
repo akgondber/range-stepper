@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, beforeAll } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import RangeStepper from "../src";
 
 describe("RangeStepper", () => {
@@ -60,6 +60,39 @@ describe("RangeStepper", () => {
     });
   });
 
+  describe(".min", () => {
+    let min = 1;
+    beforeEach(() => {
+      stepper = new RangeStepper({ min, max, current });
+    });
+
+    it("returns current value", () => {
+      expect(stepper.min).toBe(1);
+    });
+  });
+
+  describe(".max", () => {
+    let max = 23;
+    beforeEach(() => {
+      stepper = new RangeStepper({ min, max, current });
+    });
+
+    it("returns current value", () => {
+      expect(stepper.max).toBe(23);
+    });
+  });
+
+  describe(".step", () => {
+    let step = 4;
+    beforeEach(() => {
+      stepper = new RangeStepper({ min, max, step, current });
+    });
+
+    it("returns current value", () => {
+      expect(stepper.step).toBe(4);
+    });
+  });
+
   describe(".value", () => {
     beforeEach(() => {
       stepper = new RangeStepper({ min, max, current: 2 });
@@ -67,6 +100,17 @@ describe("RangeStepper", () => {
 
     it("returns current value", () => {
       expect(stepper.value).toBe(2);
+    });
+  });
+
+  describe(".current", () => {
+    let currentVal = 19;
+    beforeEach(() => {
+      stepper = new RangeStepper({ min, max: 37, current: currentVal });
+    });
+
+    it("returns current value", () => {
+      expect(stepper.current).toBe(currentVal);
     });
   });
 
@@ -115,6 +159,44 @@ describe("RangeStepper", () => {
 
         expect(stepper.hasPrevious()).toBe(true);
       });
+    });
+  });
+
+  describe(".clone", () => {
+    beforeEach(() => {
+      max = 18;
+      current = 12;
+
+      stepper = new RangeStepper({
+        min,
+        max,
+        step,
+        current,
+      });
+    });
+
+    it("builds a new instance", () => {
+      const result = stepper.clone();
+
+      expect(result.value).toEqual(stepper.value);
+    });
+  });
+
+  describe(".asObject", () => {
+    beforeEach(() => {
+      max = 18;
+      current = 12;
+
+      stepper = new RangeStepper({
+        min,
+        max,
+        step,
+        current,
+      });
+    });
+
+    it("builds a new instance", () => {
+      expect(stepper.asObject()).toEqual({ min, max, step, current });
     });
   });
 });
