@@ -182,6 +182,27 @@ describe("RangeStepper", () => {
     });
   });
 
+  describe(".dup", () => {
+    beforeEach(() => {
+      max = 19;
+      current = 15;
+
+      stepper = new RangeStepper({
+        min,
+        max,
+        step,
+        current,
+      });
+    });
+
+    it("builds a new instance", () => {
+      const result = stepper.dup();
+
+      expect(result.max).toEqual(19);
+      expect(result.value).toEqual(stepper.value);
+    });
+  });
+
   describe(".asObject", () => {
     beforeEach(() => {
       max = 18;

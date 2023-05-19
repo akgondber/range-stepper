@@ -101,6 +101,17 @@ class RangeStepper {
       current: this.#value,
     });
   }
+
+  
+  /**
+   * An alias for the `clone` method
+   *
+   * @returns A clone for the current instance
+   */
+  dup() {
+    return this.clone();
+  }
+
   /**
    * Get min value
    *
