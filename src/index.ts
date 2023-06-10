@@ -89,6 +89,15 @@ class RangeStepper {
   }
 
   /**
+   * Check whether provided value is the current value
+   *
+   * @returns true if the current pointer equals to num, false otherwise
+   */
+  isCurrent(num: number) {
+    return this.#value === num;
+  }
+
+  /**
    * Build a clone based on current instance
    *
    * @returns A clone for the current instance

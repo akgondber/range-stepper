@@ -35,6 +35,46 @@ stepper.previous();
 console.log(stepper.value); // 2
 ```
 
+## Features
+
+```javascript
+const stepper = new RangeStepper({ max: 16 });
+stepper.next();
+console.log(stepper.value); // 1
+
+console.log(stepper.isCurrent(1)); // true
+console.log(stepper.isCurrent(5)); // false
+
+console.log(stepper.setValue(6));
+console.log(stepper.value); // 7
+
+console.log(stepper.hasNext()); // true
+console.log(stepper.setValue(16));
+console.log(stepper.hasNext()); // false
+
+console.log(stepper.setValue(5));
+console.log(stepper.hasPrevious()); // true
+console.log(stepper.setValue(0));
+console.log(stepper.hasPrevious()); // false
+
+console.log(stepper.setValue(16));
+// uses cyclical approach
+// when max is reached
+// `next()` method moves a current pointer to the min value
+stepper.next();
+console.log(stepper.value); // 0
+
+console.log(stepper.setValue(0));
+// when current value equals to min value
+// `previous()` method moves a current pointer to the max value
+stepper.previous();
+console.log(stepper.value); // 16
+
+const obj = stepper.asObject(); // get an object representation
+const clonedInstance = stepper.clone(); // get a clone
+const dupInstance = stepper.dup(); // `dup` is an alias for the `clone` method
+```
+
 ## License
 
 MIT © [Rushan Alyautdinov](https://github.com/akgondber)

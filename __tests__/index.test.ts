@@ -162,6 +162,24 @@ describe("RangeStepper", () => {
     });
   });
 
+  describe(".isCurrent", () => {
+    it("returns true if the current pointer equals to provided value", () => {
+      min = 0;
+      current = 5;
+      stepper = new RangeStepper({ min, max, current, step });
+
+      expect(stepper.isCurrent(5)).toBe(true);
+    });
+
+    it("returns false if if the current pointer differs from provided value", () => {
+      min = 0;
+      current = 5;
+      stepper = new RangeStepper({ min, max, current, step });
+
+      expect(stepper.isCurrent(2)).toBe(false);
+    });
+  });
+
   describe(".clone", () => {
     beforeEach(() => {
       max = 18;
