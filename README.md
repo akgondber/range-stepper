@@ -1,6 +1,6 @@
 # range-stepper [![NPM version][npm-image]][npm-url]
 
-> Build a range with current value and a step and use methods to get previous or next value
+> Build a range with current value and a step and use convenient api to manipulate with a pointer
 
 This package can be useful for cycling through tabs, index based apps and games, slides, etc. Instead of defining and checking indexes you can instantiate this class and use convenience api.
 
