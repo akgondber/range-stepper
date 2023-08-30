@@ -98,6 +98,35 @@ class RangeStepper {
   }
 
   /**
+   * Moves current value to the start
+   * ```ts
+   * const stepper : RangeStepper = new RangeStepper({ min: 2, max: 12, current: 6 });
+   * console.log(stepper.value); // 6
+   * stepper.first();
+   * console.log(stepper.value); // 2
+   * ```
+   * @returns an instance which can be useful for chaining
+   */
+  first() {
+    this.#value = this.#min;
+    return this;
+  }
+
+  /**
+   * Moves a current value to the end
+   * ```ts
+   * const stepper : RangeStepper = new RangeStepper({ min: 2, max: 12, current: 6 });
+   * console.log(stepper.value); // 6
+   * stepper.last();
+   * console.log(stepper.value); // 12
+   * ```
+   * @returns an instance which can be useful for chaining
+   */
+  last() {
+    this.#value = this.#max;
+    return this;
+  }
+  /**
    * Build a clone based on current instance
    *
    * @returns A clone for the current instance
@@ -111,7 +140,6 @@ class RangeStepper {
     });
   }
 
-  
   /**
    * An alias for the `clone` method
    *

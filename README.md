@@ -70,6 +70,16 @@ console.log(stepper.setValue(0));
 stepper.previous();
 console.log(stepper.value); // 16
 
+// in order to move a pointer to start value
+// you can use the `first()` method
+stepper.first();
+console.log(stepper.value); // 0
+
+// in order to move a pointer to start value
+// you can use the `last()` method
+stepper.last();
+console.log(stepper.value); // 16
+
 const obj = stepper.asObject(); // get an object representation
 const clonedInstance = stepper.clone(); // get a clone
 const dupInstance = stepper.dup(); // `dup` is an alias for the `clone` method

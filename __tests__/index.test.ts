@@ -60,6 +60,30 @@ describe("RangeStepper", () => {
     });
   });
 
+  describe(".first", () => {
+    beforeEach(() => {
+      stepper = new RangeStepper({ min, max, current: 4 });
+    });
+
+    it("moves current value to the first position", () => {
+      stepper.first();
+
+      expect(stepper.value).toBe(min);
+    });
+  });
+
+  describe(".last", () => {
+    beforeEach(() => {
+      stepper = new RangeStepper({ min, max, current: 2 });
+    });
+
+    it("moves current value to the last position", () => {
+      stepper.last();
+
+      expect(stepper.value).toBe(max);
+    });
+  });
+
   describe(".min", () => {
     let min = 1;
     beforeEach(() => {
