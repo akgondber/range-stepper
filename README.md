@@ -83,6 +83,12 @@ console.log(stepper.value); // 16
 const obj = stepper.asObject(); // get an object representation
 const clonedInstance = stepper.clone(); // get a clone
 const dupInstance = stepper.dup(); // `dup` is an alias for the `clone` method
+
+// add possibility to use single value
+const stepper = new RangeStepper({ min: 0, max: 0, single: true });
+console.log(stepper.value); // 0
+stepper.next();
+console.log(stepper.value); // 0
 ```
 
 ## License

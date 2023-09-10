@@ -15,4 +15,8 @@ export interface StepperConfig {
    * current value
    */
   current?: number;
+  /**
+   * Whether to use single value support (min and max have equal value)
+   */
+  single?: boolean;
 }

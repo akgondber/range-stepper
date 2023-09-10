@@ -27,6 +27,12 @@ describe("RangeStepper", () => {
         new RangeStepper({ min: 5, max: 2, current: 7 });
       }).toThrowError(/must be greater than/);
     });
+
+    it("not throws an exception if max value is not greater than min and single is set to true", () => {
+      expect(() => {
+        new RangeStepper({ min: 0, max: 0, single: true });
+      }).not.toThrowError();
+    });
   });
 
   describe(".next", () => {

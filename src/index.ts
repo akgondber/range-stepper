@@ -16,9 +16,17 @@ class RangeStepper {
    * @param step - step to be used when moving to next or previous position
    * @params current - current value (default is min value)
    */
-  constructor({ min = 0, max, step = 1, current }: StepperConfig) {
+  constructor({
+    min = 0,
+    max,
+    step = 1,
+    current,
+    single = false,
+  }: StepperConfig) {
     if (max <= min) {
-      throw new Error(`max must be greater than min`);
+      if (!(max === min && single)) {
+        throw new Error(`max must be greater than min`);
+      }
     }
 
     this.#min = min;
