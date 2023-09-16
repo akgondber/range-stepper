@@ -16,7 +16,7 @@ export interface StepperConfig {
    */
   current?: number;
   /**
-   * Whether to use single value support (min and max have equal value)
+   * Whether max value is inclusive
    */
-  single?: boolean;
+  inclusive?: boolean;
 }

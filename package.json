@@ -1,6 +1,6 @@
 {
   "name": "range-stepper",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Build a range with current value and a step and use convenient api to manipulate with a pointer",
   "license": "MIT",
   "author": "Rushan Alyautdinov <akgondber@gmail.com>",

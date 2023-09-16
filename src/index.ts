@@ -7,6 +7,7 @@ class RangeStepper {
   #max: number;
   #value: number;
   #step: number;
+  #inclusive: boolean;
 
   /**
    *
@@ -14,6 +15,7 @@ class RangeStepper {
    * @param min - minimum value
    * @param max - maximum value
    * @param step - step to be used when moving to next or previous position
+   * @param inclusive - whether to enable the `inclusive` option (default is true)
    * @params current - current value (default is min value)
    */
   constructor({
@@ -21,11 +23,13 @@ class RangeStepper {
     max,
     step = 1,
     current,
-    single = false,
+    inclusive = true,
   }: StepperConfig) {
     if (max <= min) {
-      if (!(max === min && single)) {
-        throw new Error(`max must be greater than min`);
+      if (!(max === min && inclusive)) {
+        throw new Error(
+          `max must be greater ${inclusive ? "or equals to" : "than"} min`,
+        );
       }
     }
 
@@ -33,6 +37,7 @@ class RangeStepper {
     this.#max = max;
     this.#step = step;
     this.#value = typeof current !== "undefined" ? current : min;
+    this.#inclusive = inclusive;
   }
 
   /**
@@ -145,6 +150,7 @@ class RangeStepper {
       max: this.#max,
       step: this.#step,
       current: this.#value,
+      inclusive: this.#inclusive,
     });
   }
 
@@ -155,6 +161,10 @@ class RangeStepper {
    */
   dup() {
     return this.clone();
+  }
+
+  _checkMax(value: number): boolean {
+    return this.inclusive ? value <= this.#max : value < this.#max;
   }
 
   /**
@@ -199,7 +209,16 @@ class RangeStepper {
    * @returns current value
    */
   get current() {
-    return this.value;
+    return this.#value;
+  }
+
+  /**
+   * Get a value of the `inclusive`
+   *
+   * @returns the `inclusive` value
+   */
+  get inclusive() {
+    return this.#inclusive;
   }
 
   asObject(): StepperConfig {
@@ -212,8 +231,12 @@ class RangeStepper {
   }
 
   private ensureInRange(value: number) {
-    if (value > this.#max && value < this.#min) {
-      throw new Error(`value must be in [${this.#min}..${this.#max}]`);
+    if (!this._checkMax(value) || value < this.#min) {
+      throw new Error(
+        `value must be in the range ${this.#min}..${
+          this.#inclusive ? "" : "."
+        }${this.#max}`,
+      );
     }
   }
 }

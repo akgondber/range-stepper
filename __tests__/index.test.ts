@@ -22,15 +22,27 @@ describe("RangeStepper", () => {
       expect(stepper.value).toBe(5);
     });
 
-    it("throws an exception if max value is not greater than min", () => {
+    it("raises an error if max value is wrong", () => {
       expect(() => {
         new RangeStepper({ min: 5, max: 2, current: 7 });
+      }).toThrowError(/must be greater or equals to/);
+    });
+
+    it("raises an error if max value is wrong and inclusive options is enabled", () => {
+      expect(() => {
+        new RangeStepper({ min: 5, max: 2, current: 7, inclusive: false });
       }).toThrowError(/must be greater than/);
     });
 
-    it("not throws an exception if max value is not greater than min and single is set to true", () => {
+    it("raises an error if max value equals to min and inclusive option is not enabled", () => {
       expect(() => {
-        new RangeStepper({ min: 0, max: 0, single: true });
+        new RangeStepper({ min: 5, max: 5, inclusive: false });
+      }).toThrowError(/must be greater than/);
+    });
+
+    it("does not raise an error if max value equals to min and inclusive option is enabled", () => {
+      expect(() => {
+        new RangeStepper({ min: 0, max: 0, inclusive: true });
       }).not.toThrowError();
     });
   });
@@ -210,6 +222,38 @@ describe("RangeStepper", () => {
     });
   });
 
+  describe(".setValue", () => {
+    let inclusive;
+
+    beforeEach(() => {
+      inclusive = false;
+
+      stepper = new RangeStepper({ min: 1, max: 2, inclusive });
+    });
+
+    describe("when inclusive mode is not enabled", () => {
+      it("raises an error if value is greater than max", () => {
+        expect(() => {
+          stepper.setValue(3);
+        }).toThrowError(/value must be in the range 1...2/);
+      });
+    });
+
+    describe("when inclusive mode is enabled", () => {
+      beforeEach(() => {
+        inclusive = true;
+
+        stepper = new RangeStepper({ min: 1, max: 2, inclusive });
+      });
+
+      it("does not raises an error if new value equals to max", () => {
+        expect(() => {
+          stepper.setValue(2);
+        }).not.toThrowError(/value must be in the range/);
+      });
+    });
+  });
+
   describe(".clone", () => {
     beforeEach(() => {
       max = 18;
@@ -227,6 +271,14 @@ describe("RangeStepper", () => {
       const result = stepper.clone();
 
       expect(result.value).toEqual(stepper.value);
+    });
+
+    it("clones an instance when the inclusive option is enabled", () => {
+      stepper = new RangeStepper({ min: 0, max: 0, inclusive: true });
+
+      expect(() => {
+        stepper.dup();
+      }).not.toThrowError();
     });
   });
 
