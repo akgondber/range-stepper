@@ -84,9 +84,15 @@ const obj = stepper.asObject(); // get an object representation
 const clonedInstance = stepper.clone(); // get a clone
 const dupInstance = stepper.dup(); // `dup` is an alias for the `clone` method
 
-// add the inclusive option to the instance
+// setting the `inclusive value to false indicating that max must be greater than min
 const stepper = new RangeStepper({ min: 0, max: 0, inclusive: false });
 // raises `max must be greater than min`
+
+// whether max value equal to min value
+const stepper = new RangeStepper({ min: 0, max: 0 });
+console.log(stepper.isSingle()); // true
+const stepper = new RangeStepper({ min: 0, max: 8 });
+console.log(stepper.isSingle()); // false
 ```
 
 ## License

@@ -213,12 +213,32 @@ describe("RangeStepper", () => {
       expect(stepper.isCurrent(5)).toBe(true);
     });
 
-    it("returns false if if the current pointer differs from provided value", () => {
+    it("returns false if the current pointer differs from provided value", () => {
       min = 0;
       current = 5;
       stepper = new RangeStepper({ min, max, current, step });
 
       expect(stepper.isCurrent(2)).toBe(false);
+    });
+  });
+
+  describe(".isSingle", () => {
+    it("returns true if max value equals to min value", () => {
+      min = 0;
+      max = 0;
+      current = 0;
+      stepper = new RangeStepper({ min, max, current });
+
+      expect(stepper.isSingle()).toBe(true);
+    });
+
+    it("returns false if max value greater than min value", () => {
+      min = 0;
+      max = 5;
+      current = 1;
+      stepper = new RangeStepper({ min, max, current });
+
+      expect(stepper.isSingle()).toBe(false);
     });
   });
 

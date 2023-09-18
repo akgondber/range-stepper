@@ -111,6 +111,15 @@ class RangeStepper {
   }
 
   /**
+   * Check whether stepper instance is single (min and max are equals)
+   *
+   * @returns true if min value quals to max value
+   */
+  isSingle() {
+    return this.#min === this.#max;
+  }
+
+  /**
    * Moves current value to the start
    * ```ts
    * const stepper : RangeStepper = new RangeStepper({ min: 2, max: 12, current: 6 });
